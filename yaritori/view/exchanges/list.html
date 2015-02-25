@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-md-12">
+    <input type="submit" name="submit" id="submit" value="新しいやり取りを作成"
+      class="btn btn-info pull-right" ng-click="open()">
+  </div>
+</div>
+<form role="form">
+  <div class="row margin-bottom-default">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="title">タイトル</label>
+        <div class="input-group">
+          <input type="text" class="form-control" name="title"
+            id="title" placeholder="○○の件について" ng-model="title">
+          <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-12">
+      <div class="form-group">
+        <label for="status">ステータス</label>
+        <div class="input-group">
+          <select class="form-control" id="status" ng-model="status"
+            ng-options="opt.id as opt.name for opt in statusOptions">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label for="user_id">作成者</label>
+        <div class="input-group">
+          <select class="form-control" id="user_id" ng-model="user_id"
+            ng-options="opt.id as opt.name for opt in partnerOptions">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label for="partner">やり取り相手</label>
+        <div class="input-group">
+          <select class="form-control" id="partner" ng-model="partner"
+            ng-options="opt.id as opt.name for opt in partnerOptions">
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label for="start_date">開始日</label>
+        <div class="input-group">
+          <input type="date" ng-model="start_date" id="start_date">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label for="end_date">期日</label>
+        <div class="input-group">
+          <input type="date" ng-model="end_date" id="end_date">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label for="create_date">作成日</label>
+        <div class="input-group">
+          <input type="date" ng-model="create_date" id="create_date">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label for="update_date">更新日</label>
+        <div class="input-group">
+          <input type="date" ng-model="update_date" id="update_date">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <input type="submit" name="submit" id="submit" value="検索"
+        class="btn btn-info pull-right" ng-click="search()">
+    </div>
+  </div>
+</form>
+<div ng-include="'view/partials/message.html'"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tr class="info">
+          <th class="col-xs-1">#</th>
+          <th class="col-xs-5">タイトル</th>
+          <th class="col-xs-1">作成者</th>
+          <th class="col-xs-1">相手</th>
+          <th class="col-xs-2">更新日時</th>
+        </tr>
+        <tr ng-repeat="value in exchanges" ng-click="goDetail(value.id)">
+          <td>{{value.id}}</td>
+          <td>{{value.title}}</td>
+          <td>{{value.name}}</td>
+          <td><p ng-repeat="user in value.users"}>{{user.name}}</p></td>
+          <td>{{value.update_date}}</td>
+        </tr>
+        </a>
+      </table>
+    </div>
+  </div>
+</div>

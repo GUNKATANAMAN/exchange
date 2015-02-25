@@ -1,0 +1,61 @@
+
+<div class="row">
+  <form role="form">
+    <div class="col-lg-12">
+      <div class="well well-sm">
+        <strong><span class="glyphicon glyphicon-asterisk"></span>必須項目</strong>
+      </div>
+      <div class="form-group">
+        <label for="InputName">氏名</label>
+        <div class="input-group">
+          <input type="text" class="form-control" name="InputName"
+            id="InputName" placeholder="今野　拳" required
+            ng-model="name"> <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="InputEmail">メールアドレス</label>
+        <div class="input-group">
+          <input type="email" class="form-control" id="InputEmailFirst"
+            name="InputEmail" placeholder="gunkatanaman@ezweb.ne.jp" required
+            ng-model="email1"> <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="InputEmail">メールアドレス（確認）</label>
+        <div class="input-group">
+          <input type="email" class="form-control" id="InputEmailSecond"
+            name="InputEmail" placeholder="確認用メールアドレス" required
+            ng-model="email2"> <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="InputPassword">パスワード</label>
+        <div class="input-group">
+          <input type="password" class="form-control"
+            id="InputPasswordFirst" name="InputPassword"
+            placeholder="konno0614" required ng-model="password1">
+          <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="InputPassword">パスワード（確認）</label>
+        <div class="input-group">
+          <input type="password" class="form-control"
+            id="InputPasswordSecond" name="InputPassword"
+            placeholder="確認用パスワード" required ng-model="password2">
+          <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <input type="submit" name="submit" id="submit" value="登録"
+        class="btn btn-info pull-right" ng-click="validate()">
+    </div>
+  </form>
+</div>
+<div ng-include="'view/partials/message.html'">
+</div>

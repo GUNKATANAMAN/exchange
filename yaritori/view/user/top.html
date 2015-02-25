@@ -1,0 +1,54 @@
+
+<div class="row">
+  <form role="form">
+    <div class="col-xs-12">
+      <div class="form-group" toggle-input>
+        <label for="InputName">氏名</label>
+        <div class="input-group hidden">
+          <input type="text" class="form-control" name="InputName"
+            id="InputName" placeholder="今野　拳" required
+            ng-model="user.name"> <span
+            class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+        <p class="text">{{user.name}}</p>
+      </div>
+      <div class="form-group" toggle-input>
+        <label for="InputEmail">メールアドレス</label>
+        <div class="input-group hidden">
+          <input type="email" class="form-control" id="InputEmailFirst"
+            name="InputEmail" placeholder="gunkatanaman@ezweb.ne.jp"
+            required ng-model="email1"> <span
+            class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+        <p class="text">{{user.mailaddress}}</p>
+      </div>
+      <div class="form-group" toggle-input>
+        <label for="InputPassword">パスワード</label>
+        <div class="input-group hidden">
+          <input type="password" class="form-control"
+            id="InputPasswordFirst" name="InputPassword"
+            placeholder="konno0614" required ng-model="password1">
+          <span class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+        <p class="text">*************</p>
+      </div>
+      <div class="form-group">
+        <label for="InputThumbnail">プロフィール画像</label> <input
+          type="button" id="InputThumbnail" value="画像選択"
+          name="InputThumbnail" ng-file-select
+          ng-file-change="upload($files)" />
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <img src="img/user/{{user.image}}" class="img-responsive">
+    </div>
+    <div class="col-xs-12">
+      <input type="button" class="btn btn-info upload-submit" value="更新"
+        class="btn btn-info pull-right" ng-click="update()">
+    </div>
+  </form>
+</div>
+<div ng-include="'view/partials/message.html'"></div>

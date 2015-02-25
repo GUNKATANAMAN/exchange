@@ -1,0 +1,149 @@
+
+<div class="row">
+  <div class="col-xs-12 description">
+    <h1>やりとり＃{{exchange.id}}</h1>
+  </div>
+</div>
+<div class="panel panel-default panel-primary">
+  <div class="panel-heading">{{exchange.title}}</div>
+  <div class="panel-body bg-info">
+    <div class="row">
+      <div class="col-sm-3 col-xs-6 bold">
+        <strong>ステータス</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">{{exchange.status}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-6 bold">
+        <strong>作成者</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">{{exchange.name}}</div>
+      <div class="col-sm-3 col-xs-6 bold">
+        <strong>やり取り相手</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <p ng-repeat="user in exchange.users">{{user.name}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-6">
+        <strong>開始日</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">{{exchange.start_date}}</div>
+      <div class="col-sm-3 col-xs-6">
+        <strong>期日</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">{{exchange.end_date}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-6">
+        <strong>作成日</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">{{exchange.create_date}}</div>
+      <div class="col-sm-3 col-xs-6">
+        <strong>更新日</strong>
+      </div>
+      <div class="col-sm-3 col-xs-6">{{exchange.update_date}}</div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-sm-12">
+        <strong>説明：</strong>
+        <p ng-bind-html="exchange.description"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 description">
+    <button class="btn btn-default center-block"
+      ng-click="openHistory()">
+      <span class="glyphicon glyphicon-pencil"></span> 履歴追加
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 description">
+    <h1>履歴</h1>
+  </div>
+</div>
+
+<div class="panel panel-default panel-info" ng-repeat="val in history">
+  <div class="panel-heading clearfix">
+    履歴＃{{val.seq}} - {{val.user_name}}さんが書きました
+    <div class="pull-right">
+      <button type="button" class="btn btn-default btn-success btn-sm"
+        ng-click="openNice(val.seq)">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+        ナイスする
+      </button>
+      <span>｜</span>
+      <button type="button" class="btn btn-default btn-danger btn-sm"
+        ng-click="openBad(val.seq)">
+        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+        ツッコム
+      </button>
+    </div>
+
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12 bold">{{val.change_log}}</div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-3 col-sm-2">
+        <img class="thumbnail img-responsive" src="./img/user/{{val.image}}"
+          width="100">
+      </div>
+      <div class="col-xs-8 col-sm-10">
+
+        <p ng-bind-html="val.description"></p>
+      </div>
+    </div>
+
+    <div class="panel panel-default panel-success nice" ng-repeat="nice in val.nice">
+      <div class="panel-heading">
+        <span> <span class="glyphicon glyphicon-thumbs-up"
+          aria-hidden="true"></span> ナイス＃{{nice.seq}} - {{nice.user_name}}さんが書きました
+        </span>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-3 col-sm-2">
+            <img class="thumbnail img-responsive"
+              src="./img/user/{{val.image}}" width="100">
+          </div>
+          <div class="col-xs-8 col-sm-10">
+            <p ng-bind-html="nice.description">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default panel-danger bad" ng-repeat="bad in val.bad">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+        ツッコミ＃{{bad.seq}} - {{bad.user_name}}さんが書きました
+
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-3 col-sm-2">
+            <img class="thumbnail img-responsive"
+              src="./img/user/{{val.image}}" width="100">
+          </div>
+          <div class="col-xs-8 col-sm-10">
+
+            <p ng-bind-html="bad.description">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

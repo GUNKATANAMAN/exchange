@@ -1,0 +1,33 @@
+
+<div class="row">
+  <form role="form">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="InputEmail">メールアドレス</label>
+        <div class="input-group">
+          <input type="email" class="form-control" id="InputEmailFirst"
+            name="InputEmail" required ng-model="email1"> <span
+            class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="InputPassword">パスワード</label>
+        <div class="input-group">
+          <input type="password" class="form-control"
+            id="InputPasswordFirst" name="InputPassword" required
+            ng-model="password1"> <span
+            class="input-group-addon"><span
+            class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <input type="submit" name="submit" id="submit" value="ログイン"
+        class="btn btn-info pull-right" ng-click="login()">
+    </div>
+  </form>
+</div>
+<div class="text-center">
+  <a href="#/register">アカウントを作成する</a>
+</div>
+<div ng-include="'view/partials/message.html'">
+</div>
