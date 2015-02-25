@@ -1,0 +1,13 @@
+{
+    "event": "suiteStart",
+    "suite": "frontend",
+    "tests": 22
+}{
+    "event": "suiteStart",
+    "suite": "Frontend_BadControllerTest",
+    "tests": 1
+}{
+    "event": "testStart",
+    "suite": "Frontend_BadControllerTest",
+    "test": "Frontend_BadControllerTest::testPostInsert"
+}

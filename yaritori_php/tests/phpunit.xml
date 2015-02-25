@@ -1,0 +1,11 @@
+<phpunit bootstrap="./bootstrap.php">
+	<testsuites>
+		<testsuite name="exchange app frontend">
+			<directory>frontend</directory>
+		</testsuite>
+	</testsuites>
+
+	<logging>
+		<log type="tap" target="./logfile.tap" />
+	</logging>
+</phpunit>

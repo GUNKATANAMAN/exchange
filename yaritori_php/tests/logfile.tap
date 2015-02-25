@@ -1,0 +1,4 @@
+TAP version 13
+ok 1 - Frontend_AdminControllerTest::testGet
+ok 2 - Frontend_AdminControllerTest::testPut
+1..2
