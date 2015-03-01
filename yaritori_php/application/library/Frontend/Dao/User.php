@@ -26,7 +26,7 @@ class Frontend_Dao_User extends Common_Dao
     function selectUserWithProject ($projectId)
     {
         $select = $this->selectJoin()
-            ->from(array('u'=>'user'),array("id","name"))
+            ->from(array('u'=>'user'),array("id","name",'mailaddress'))
             ->join(array('up' => 'user_project'), 'u.id = up.user_id',array())
             ->join(array('p' => 'project'), 'p.id = up.project_id',array())
             ->where('p.id = :project_id')

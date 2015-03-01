@@ -1,42 +1,109 @@
-
-<form role="form">
+<form role="form pull-left">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group" toggle-input>
-        <label for="InputName">プロジェクト名</label>
-        <div class="input-group hidden">
-          <input type="text" class="form-control" name="InputName"
-            id="InputName" placeholder="今野　拳" required
-            ng-model="project.name"> <span
-            class="input-group-addon"><span
-            class="glyphicon glyphicon-asterisk"></span></span>
+    <div class="col-xs-12 col-sm-6">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group" toggle-input>
+            <label for="InputName">プロジェクト名</label>
+            <div class="input-group hidden">
+              <input type="text" class="form-control" name="InputName"
+                id="InputName" placeholder="今野　拳" required
+                ng-model="project.name"> <span
+                class="input-group-addon"><span
+                class="glyphicon glyphicon-asterisk"></span></span>
+            </div>
+            <p class="text">{{project.name}}</p>
+          </div>
         </div>
-        <p class="text">{{project.name}}</p>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-8">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="InputDescription">説明</label>
+            <textarea class="form-control"
+              ng-model="project.description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="InputThumbnail">アイコン画像</label> <input
+              type="button" id="InputThumbnail" value="画像選択"
+              name="InputThumbnail" ng-file-select
+              ng-file-change="upload($files)" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <img src="img/project/{{project.image}}"
+            class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="button" class="btn btn-info upload-submit"
+            value="更新" class="btn btn-info pull-right"
+            ng-click="update()">
+        </div>
+      </div>
 
-      <div class="form-group">
-        <label for="InputDescription">説明</label>
-        <textarea class="form-control" ng-model="project.description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="InputThumbnail">アイコン画像</label> <input type="button"
-          id="InputThumbnail" value="画像選択" name="InputThumbnail"
-          ng-file-select ng-file-change="upload($files)" />
-      </div>
     </div>
-  </div>
-  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="InputName">ユーザーを追加</label>
+            <div>
+              <input type="text" class="form-control"
+                name="InputMailaddress" id="InputMailaddress"
+                placeholder="gunkatanaman@ezweb.ne.jp"
+                ng-model="mailaddress"> <input type="button"
+                value="検索" class="btn btn-info pull-right"
+                ng-click="searchUser()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-show="!!user">
+        <div class="col-xs-12">
+          <div class="panel panel-default panel-info">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <img class="thumbnail img-responsive"
+                    src="./img/user/{{user.image}}" width="100">
+                </div>
+                <div class="col-md-8">
+                  <p>{{user.name}}</p>
+                </div>
+              </div>
+            </div>
+            <input type="button" class="btn btn-info upload-submit"
+              value="追加" class="btn btn-info pull-right"
+              ng-click="addUser(user.id)">
 
-    <div class="col-xs-12 col-sm-8 col-md-3">
-      <img src="img/project/{{project.image}}" class="img-responsive">
-    </div>
-    <div class="col-xs-12">
-      <input type="button" class="btn btn-info upload-submit" value="更新"
-        class="btn btn-info pull-right" ng-click="update()">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table table-hover">
+          <tr class="info">
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th>削除</th>
+          </tr>
+          <tr ng-repeat="value in users">
+            <td>{{value.name}}</td>
+            <td>{{value.mailaddress}}</td>
+            <td><input type="button"
+              class="btn btn-info upload-submit" value="削除"
+              class="btn btn-info pull-right"
+              ng-click="deleteUser(value.id)"></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </form>

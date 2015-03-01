@@ -24,5 +24,4 @@ class Frontend_Dao_UserProject extends Common_Dao
         $result = $this->fetchRow($select);
         return $result;
     }
-
 }
