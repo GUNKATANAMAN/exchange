@@ -31,9 +31,13 @@ class Base extends Zend_Test_PHPUnit_ControllerTestCase {
 		$this->resetRequest ()->resetResponse ();
 	}
 
-	public function setProject() {
+	public function setProject($id = null) {
 	    $this->login ();
-	    $this->setRawBody ( 'PUT', _TEST_USER_2_PROJECT_ID_ );
+	    $data = _TEST_USER_2_PROJECT_ID_;
+	    if(isset($id)){
+            $data = '{"project_id":' . $id . '}';
+	    }
+	    $this->setRawBody ( 'PUT', $data);
 	    $this->dispatch ( '/frontend/Projects/' );
 		$this->resetRequest ()->resetResponse ();
 	}

@@ -24,16 +24,16 @@ class Frontend_Dao_HistoryBad extends Common_Dao
     public function selectHistory ($params)
     {
         $select = $this->selectJoin()
-            ->from(array(
-                'eh' => 'exchange_history_bad'
-        ))
+            ->from(
+                array(
+                        'eh' => 'exchange_history_bad'
+                ))
             ->join(array(
                 'u' => 'user'
         ), 'u.id = eh.user_id', array(
                 'image'
         ))
-            ->
-        where("exchange_id = ?", $params['exchange_id'])
+            ->where("exchange_id = ?", $params['exchange_id'])
             ->where("exchange_seq = ?", $params['exchange_seq'])
             ->order(array(
                 'seq DESC'
@@ -50,22 +50,30 @@ class Frontend_Dao_HistoryBad extends Common_Dao
     public function recentHistory ($projectId)
     {
         $select = $this->selectJoin()
-        ->from(
+            ->from(
                 array(
                         'eh' => 'exchange_history_bad'
                 ))
-                ->join(array(
+            ->join(
+                array(
                         'e' => 'exchange'
-                ), 'e.id = eh.exchange_id',array(''))
-                ->join(array(
+                ), 'e.id = eh.exchange_id', array(
+                        ''
+                ))
+            ->join(
+                array(
                         'u' => 'user'
-                ), 'u.id = eh.user_id', array(
+                ), 'u.id = eh.user_id',
+                array(
                         'image'
                 ))
-                ->order(array(
+            ->where('e.project_id = ?', $projectId)
+            ->
+        order(
+                array(
                         'eh.update_date DESC'
                 ))
-                ->limit(1);
+            ->limit(1);
         $result = $this->fetchAll($select);
         foreach ($result as $key => $val) {
             $result[$key]['user_name'] = Common_Utill_Table::getUserName(
@@ -74,5 +82,4 @@ class Frontend_Dao_HistoryBad extends Common_Dao
         }
         return $result;
     }
-
 }

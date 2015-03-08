@@ -22,6 +22,14 @@ class Frontend_TopController extends Frontend_Controller
         $historyBad = $historyBadDao->recentHistory(
                 $this->session->getProjectId());
 
+        // 0件のときは空の配列を返す
+        if(empty($historyNice)){
+            $historyNice = array('');
+        }
+        if(empty($historyBad)){
+            $historyBad = array('');
+        }
+
         $this->setJson(
                 array(
                         'history' => $exchanges,

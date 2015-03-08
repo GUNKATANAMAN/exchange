@@ -61,5 +61,4 @@ class Frontend_Dao_Exchange extends Common_Dao
 
         return $result;
     }
-
 }

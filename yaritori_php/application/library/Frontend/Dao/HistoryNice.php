@@ -56,12 +56,15 @@ class Frontend_Dao_HistoryNice extends Common_Dao
                 ))
             ->join(array(
                 'e' => 'exchange'
-        ), 'e.id = eh.exchange_id', array(''))
+        ), 'e.id = eh.exchange_id', array(
+                ''
+        ))
             ->join(array(
                 'u' => 'user'
         ), 'u.id = eh.user_id', array(
                 'image'
         ))
+            ->where('e.project_id = ?', $projectId)
             ->order(array(
                 'eh.update_date DESC'
         ))

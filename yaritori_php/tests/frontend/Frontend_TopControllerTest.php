@@ -16,4 +16,18 @@ class Frontend_TopControllerTest extends Base {
 		$this->assertEqualsLog( true, !empty($result['nice']) );
 		$this->assertEqualsLog( true, !empty($result['bad']) );
 	}
+
+	public function testGetZeroData() {
+	    $this->login ();
+	    $this->setProject(51);
+
+	    $this->dispatch ( '/frontend/Top/' );
+	    $body = $this->getResponse ()->getBody ();
+	    $result = Zend_Json::decode($body);
+
+	    $this->assertEqualsLog( 0, count($result['history']) );
+	    $this->assertEqualsLog( true, empty($result['nice']) );
+	    $this->assertEqualsLog( true, empty($result['bad']) );
+	}
+
 }
