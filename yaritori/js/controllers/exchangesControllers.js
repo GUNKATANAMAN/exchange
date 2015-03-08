@@ -393,7 +393,7 @@ exchangesControllers.controller('ExchangesCtrl', [
        * sample json [ { id:1, number:1, person_name:"今野", header_text:{
        * status:"進行中" }, img_url:"", body_text:"説明文テスト<br>説明文テスト<br>説明文テスト<br>" } ];
        */
-      $scope.cards = $http.get(_FRONT_APP_URL_ + "Top/index").success(
+      $scope.cards = $http.get(_FRONT_APP_URL_ + "Top").success(
           function(data) {
             $scope.history = data.history;
             $scope.nice = data.nice;
