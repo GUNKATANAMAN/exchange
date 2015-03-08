@@ -11,10 +11,8 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-4">
-              <img ng-if="project.img_url.length <= 0"
-                class="thumbnail img-responsive" src="./img/noimage.gif"
-                width="100"> <img ng-if="project.img_url.length > 0"
-                class="thumbnail img-responsive" src="{{img_url}}"
+              <img ng-if="project.image.length > 0"
+                class="thumbnail img-responsive" src="./img/project/{{project.image}}"
                 width="100">
             </div>
             <div class="col-md-8">

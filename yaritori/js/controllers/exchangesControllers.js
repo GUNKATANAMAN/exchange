@@ -376,7 +376,14 @@ exchangesControllers.controller('ExchangesBadModalCtrl', ['$scope',
         $modalInstance.dismiss('cancel');
       };
     }]);
-
+/*
+ *
+ *
+ * "nice":[{"exchange_id":"8","exchange_seq":"2","seq":"1","user_id":"94","description":"aaaa","update_date":"2015-02-14
+ * 18:59:07","id":"8","project_id":"35","title":"\u30c6\u30b9\u30c8\u30b1\u30fc\u30b9\u4f5c\u6210","status":"2","start_date":"2015-12-31","end_date":"2013-12-30","create_date":"2015-02-04
+ * 23:18:20","image":"94.JPG","user_name":"\u8a66\u9a13\u30c7\u30fc\u30bf"}]
+ *
+ */
 exchangesControllers.controller('ExchangesCtrl', [
     '$scope',
     '$routeParams',
@@ -388,6 +395,8 @@ exchangesControllers.controller('ExchangesCtrl', [
        */
       $scope.cards = $http.get(_FRONT_APP_URL_ + "Top/index").success(
           function(data) {
-            $scope.cards = data;
+            $scope.history = data.history;
+            $scope.nice = data.nice;
+            $scope.bad = data.bad;
           });
     }]);

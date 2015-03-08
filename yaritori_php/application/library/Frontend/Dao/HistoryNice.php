@@ -24,9 +24,10 @@ class Frontend_Dao_HistoryNice extends Common_Dao
     public function selectHistory ($params)
     {
         $select = $this->selectJoin()
-            ->from(array(
-                'eh' => 'exchange_history_nice'
-        ))
+            ->from(
+                array(
+                        'eh' => 'exchange_history_nice'
+                ))
             ->join(array(
                 'u' => 'user'
         ), 'u.id = eh.user_id', array(
@@ -37,6 +38,34 @@ class Frontend_Dao_HistoryNice extends Common_Dao
             ->order(array(
                 'seq DESC'
         ));
+        $result = $this->fetchAll($select);
+        foreach ($result as $key => $val) {
+            $result[$key]['user_name'] = Common_Utill_Table::getUserName(
+                    $val['user_id']);
+            $result[$key]['description'] = nl2br($val['description']);
+        }
+        return $result;
+    }
+
+    public function recentHistory ($projectId)
+    {
+        $select = $this->selectJoin()
+            ->from(
+                array(
+                        'eh' => 'exchange_history_nice'
+                ))
+            ->join(array(
+                'e' => 'exchange'
+        ), 'e.id = eh.exchange_id', array(''))
+            ->join(array(
+                'u' => 'user'
+        ), 'u.id = eh.user_id', array(
+                'image'
+        ))
+            ->order(array(
+                'eh.update_date DESC'
+        ))
+            ->limit(1);
         $result = $this->fetchAll($select);
         foreach ($result as $key => $val) {
             $result[$key]['user_name'] = Common_Utill_Table::getUserName(

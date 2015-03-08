@@ -25,13 +25,46 @@ class Frontend_Dao_History extends Common_Dao
     public function selectHistory ($params)
     {
         $select = $this->selectJoin()
-            ->from(array('eh'=>'exchange_history'))
-            ->join(array('u'=>'user'), 'u.id = eh.user_id', array('image'))
+            ->from(
+                array(
+                        'eh' => 'exchange_history'
+                ))
+            ->join(array(
+                'u' => 'user'
+        ), 'u.id = eh.user_id', array(
+                'image'
+        ))
             ->where("exchange_id = ?", $params['id'])
             ->where("project_id = ?", $params['project_id'])
             ->order(array(
                 'seq DESC'
         ));
+        $result = $this->fetchAll($select);
+        foreach ($result as $key => $val) {
+            $result[$key]['user_name'] = Common_Utill_Table::getUserName(
+                    $val['user_id']);
+            $result[$key]['description'] = nl2br($val['description']);
+        }
+        return $result;
+    }
+
+    public function recentHistory ($projectId)
+    {
+        $select = $this->selectJoin()
+            ->from(
+                array(
+                        'eh' => 'exchange_history'
+                ))
+            ->join(array(
+                'u' => 'user'
+        ), 'u.id = eh.user_id', array(
+                'image'
+        ))
+            ->where("project_id = ?", $projectId)
+            ->order(array(
+                'eh.create_time DESC'
+        ))
+            ->limit(3);
         $result = $this->fetchAll($select);
         foreach ($result as $key => $val) {
             $result[$key]['user_name'] = Common_Utill_Table::getUserName(
