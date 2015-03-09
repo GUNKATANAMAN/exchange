@@ -35,9 +35,10 @@ class Common_Controller extends Zend_Rest_Controller
         $this->log(Zend_Log::DEBUG, "start preDispatch");
         $this->log(Zend_Log::DEBUG, "getRawBody");
         $this->request = Zend_Json::decode($this->getRequest()->getRawBody());
-        if(empty($this->request)){
-            // GET PATTERN
-            $this->request = $this->getRequest()->getParams();
+
+        // GET PATTERN
+        foreach($this->getRequest()->getParams() as $key => $val){
+            $this->request[$key] = $val;
         }
         $this->log(Zend_Log::DEBUG, "beginTransaction");
         Zend_Registry::get("db")->beginTransaction();

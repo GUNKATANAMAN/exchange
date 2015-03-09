@@ -14,28 +14,37 @@ class Frontend_ExchangesController extends Frontend_Controller
                 $this->session->getProjectId());
         // リストの取得(TODO)
         $exchangeDao = new Frontend_Dao_Exchange();
-        $this->log(Zend_Log::DEBUG,$this->request);
         $list = $exchangeDao->searchExchange($this->request,
                 $this->session->getProjectId());
+        $this->log(Zend_Log::DEBUG,$this->request);
+        // paginator
+        $paginator = $exchangeDao->getPaginator($this->request,
+                $this->session->getProjectId());
+
         $result = array(
                 "status" => $status,
                 "partner" => $partner,
-                'exchanges' => $list
+                'exchanges' => $list,
+                'paginator' => $paginator
         );
 
         $this->setJson($result);
     }
 
-    public function getAction(){
+    public function getAction ()
+    {
         $exchangeDao = new Frontend_Dao_Exchange();
-        $this->log(Zend_Log::DEBUG,$this->request);
+        $this->log(Zend_Log::DEBUG, $this->request);
         $list = $exchangeDao->searchExchange($this->request,
                 $this->session->getProjectId());
-        foreach($list as $key=>$val){
+        foreach ($list as $key => $val) {
             $list[$key]["description"] = nl2br($val["description"]);
-            $list[$key]["status"] = Common_Utill_Table::getStatusName($val['status']);
+            $list[$key]["status"] = Common_Utill_Table::getStatusName(
+                    $val['status']);
         }
-        $this->setJson(array('exchanges' => $list));
+        $this->setJson(array(
+                'exchanges' => $list
+        ));
     }
 
     public function postAction ()

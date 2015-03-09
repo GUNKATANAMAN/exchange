@@ -113,3 +113,20 @@
     </div>
   </div>
 </div>
+<nav ng-show="paginator.list">
+  <ul class="pagination">
+    <li ng-class="{disabled : !paginator.hasPrev}">
+      <a href="javascript:void(0);" aria-label="Previous" ng-click="pagelink(paginator.prevPage)">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="page in paginator.list"  ng-class="{active: page.isActive}">
+      <a href="javascript:void(0);" ng-click="pagelink(page.number)">{{page.number}}</a>
+    </li>
+    <li ng-class="{disabled: !paginator.hasNext}">
+      <a href="javascript:void(0);" aria-label="Next" ng-click="pagelink(paginator.nextPage)">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

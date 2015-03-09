@@ -23,7 +23,19 @@ exchangesControllers
                   "" : ""
                 });
                 $scope.exchanges = data.exchanges;
+                $scope.paginator = data.paginator;
               });
+
+              $scope.pagelink = function(number) {
+                if(number < 1 || number > $scope.paginator.maxPage){
+                  return false;
+                }
+                $http.get(_FRONT_APP_URL_ + "Exchanges?page=" + number)
+                    .success(function(data) {
+                      $scope.exchanges = data.exchanges;
+                      $scope.paginator = data.paginator;
+                    })
+              }
 
               $scope.open = function(size) {
 
@@ -67,6 +79,7 @@ exchangesControllers
                 $http.get(_FRONT_APP_URL_ + "Exchanges" + params).success(
                     function(data) {
                       $scope.exchanges = data.exchanges;
+                      $scope.paginator = data.paginator;
                     });
               }
 
@@ -384,19 +397,15 @@ exchangesControllers.controller('ExchangesBadModalCtrl', ['$scope',
  * 23:18:20","image":"94.JPG","user_name":"\u8a66\u9a13\u30c7\u30fc\u30bf"}]
  *
  */
-exchangesControllers.controller('ExchangesCtrl', [
-    '$scope',
-    '$routeParams',
-    '$http',
-    function($scope, $routeParams, $http) {
+exchangesControllers.controller('ExchangesCtrl', ['$scope', '$routeParams',
+    '$http', function($scope, $routeParams, $http) {
       /*
        * sample json [ { id:1, number:1, person_name:"今野", header_text:{
        * status:"進行中" }, img_url:"", body_text:"説明文テスト<br>説明文テスト<br>説明文テスト<br>" } ];
        */
-      $scope.cards = $http.get(_FRONT_APP_URL_ + "Top").success(
-          function(data) {
-            $scope.history = data.history;
-            $scope.nice = data.nice;
-            $scope.bad = data.bad;
-          });
+      $scope.cards = $http.get(_FRONT_APP_URL_ + "Top").success(function(data) {
+        $scope.history = data.history;
+        $scope.nice = data.nice;
+        $scope.bad = data.bad;
+      });
     }]);
